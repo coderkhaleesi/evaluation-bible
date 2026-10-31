@@ -4,8 +4,8 @@ Usage: python tools/validate_structure.py [--root DIR]
 
 Exit 1 with one line per problem, or exit 0 with the count of skills checked. The rules come
 from PLAN.md Phase 0 step 5: a skill directory needs a demo directory of the same name and the
-reverse, the frontmatter `name` must equal the directory name, SKILL.md may not exceed 500
-lines, and the frontmatter may use only the six portable fields.
+reverse, the frontmatter `name` must equal the directory name and be lower-case kebab-case,
+SKILL.md may not exceed 500 lines, and the frontmatter may use only the six portable fields.
 """
 
 from __future__ import annotations
@@ -21,6 +21,7 @@ PORTABLE_FIELDS = frozenset(
 MAX_SKILL_LINES = 500
 TEMPLATE_DIR = "_template"
 FIELD = re.compile(r"^([A-Za-z][A-Za-z0-9-]*):")
+KEBAB_CASE = re.compile(r"^[a-z0-9]+(-[a-z0-9]+)*$")
 
 
 def frontmatter_fields(text: str) -> tuple[dict[str, str], str | None]:
@@ -56,10 +57,15 @@ def skill_problems(skill_dir: Path, demos: Path) -> list[str]:
     declared = fields.get("name")
     if declared is None:
         problems.append(f"skills/{name}/SKILL.md: frontmatter has no name")
-    elif declared != name:
-        problems.append(
-            f"skills/{name}/SKILL.md: frontmatter name {declared!r} differs from the directory name"
-        )
+    else:
+        if declared != name:
+            problems.append(
+                f"skills/{name}/SKILL.md: frontmatter name {declared!r} differs from the directory name"
+            )
+        if not KEBAB_CASE.match(declared):
+            problems.append(
+                f"skills/{name}/SKILL.md: frontmatter name {declared!r} is not lower-case kebab-case"
+            )
     if "description" not in fields:
         problems.append(f"skills/{name}/SKILL.md: frontmatter has no description")
     for field in sorted(set(fields) - PORTABLE_FIELDS):
