@@ -1,4 +1,4 @@
-# Installed by software-factories (install.sh). Pinned to factory ref 99ab225.
+# Installed by software-factories (install.sh). Pinned to factory ref bb0de4e.
 # Edit factory.json for commands and lanes. Re-run install.sh to move the pins.
 name: CI
 on:
@@ -24,7 +24,7 @@ jobs:
           fetch-depth: 0
           persist-credentials: false
       - id: classify
-        uses: coderkhaleesi/software-factories/actions/classify@99ab225dcf92b4470b127659fc37681cf1b8ba34 # software-factories 99ab225
+        uses: coderkhaleesi/software-factories/actions/classify@bb0de4e119ecce0547faad6a6a5e83334a29ac86 # software-factories bb0de4e
   static:
     needs: changes
     if: ${{ fromJSON(needs.changes.outputs.selection).lanes.static }}
@@ -35,7 +35,7 @@ jobs:
         with:
           persist-credentials: false
       - uses: ./.github/actions/factory-setup
-      - uses: coderkhaleesi/software-factories/actions/lane@99ab225dcf92b4470b127659fc37681cf1b8ba34 # software-factories 99ab225
+      - uses: coderkhaleesi/software-factories/actions/lane@bb0de4e119ecce0547faad6a6a5e83334a29ac86 # software-factories bb0de4e
         with:
           lane: static
           selection: ${{ needs.changes.outputs.selection }}
@@ -49,7 +49,7 @@ jobs:
         with:
           persist-credentials: false
       - uses: ./.github/actions/factory-setup
-      - uses: coderkhaleesi/software-factories/actions/lane@99ab225dcf92b4470b127659fc37681cf1b8ba34 # software-factories 99ab225
+      - uses: coderkhaleesi/software-factories/actions/lane@bb0de4e119ecce0547faad6a6a5e83334a29ac86 # software-factories bb0de4e
         with:
           lane: unit
           selection: ${{ needs.changes.outputs.selection }}
@@ -63,7 +63,7 @@ jobs:
         with:
           persist-credentials: false
       - uses: ./.github/actions/factory-setup
-      - uses: coderkhaleesi/software-factories/actions/lane@99ab225dcf92b4470b127659fc37681cf1b8ba34 # software-factories 99ab225
+      - uses: coderkhaleesi/software-factories/actions/lane@bb0de4e119ecce0547faad6a6a5e83334a29ac86 # software-factories bb0de4e
         with:
           lane: integration
           selection: ${{ needs.changes.outputs.selection }}
@@ -77,7 +77,7 @@ jobs:
         with:
           persist-credentials: false
       - uses: ./.github/actions/factory-setup
-      - uses: coderkhaleesi/software-factories/actions/lane@99ab225dcf92b4470b127659fc37681cf1b8ba34 # software-factories 99ab225
+      - uses: coderkhaleesi/software-factories/actions/lane@bb0de4e119ecce0547faad6a6a5e83334a29ac86 # software-factories bb0de4e
         with:
           lane: acceptance
           selection: ${{ needs.changes.outputs.selection }}
@@ -91,7 +91,7 @@ jobs:
         with:
           persist-credentials: false
       - uses: ./.github/actions/factory-setup
-      - uses: coderkhaleesi/software-factories/actions/lane@99ab225dcf92b4470b127659fc37681cf1b8ba34 # software-factories 99ab225
+      - uses: coderkhaleesi/software-factories/actions/lane@bb0de4e119ecce0547faad6a6a5e83334a29ac86 # software-factories bb0de4e
         with:
           lane: artifact
           selection: ${{ needs.changes.outputs.selection }}
@@ -101,6 +101,6 @@ jobs:
     runs-on: ubuntu-24.04
     timeout-minutes: 5
     steps:
-      - uses: coderkhaleesi/software-factories/actions/required@99ab225dcf92b4470b127659fc37681cf1b8ba34 # software-factories 99ab225
+      - uses: coderkhaleesi/software-factories/actions/required@bb0de4e119ecce0547faad6a6a5e83334a29ac86 # software-factories bb0de4e
         with:
           needs: ${{ toJSON(needs) }}
