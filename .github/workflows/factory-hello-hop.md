@@ -24,7 +24,7 @@ timeout-minutes: 5
 max-turns: 10
 max-ai-credits: 20
 max-daily-ai-credits: 50
-source: coderkhaleesi/software-factories/workflows/factory-hello-hop.md@ee811301e9bbff1fca53cc037eb275f06be435ab
+source: coderkhaleesi/software-factories/workflows/factory-hello-hop.md@f9e68649bec8cfc3a32b4b8e7bfe948591947d16
 ---
 
 # Factory hello, hop 2
