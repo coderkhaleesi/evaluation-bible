@@ -9,3 +9,7 @@ __pycache__/
 dist/
 build/
 .DS_Store
+.agents/PLAN.md
+.agents/todo.md
+.agents/*.tsv
+reports/

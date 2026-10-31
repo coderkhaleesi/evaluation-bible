@@ -80,18 +80,14 @@ def validate(root: Path) -> list[str]:
         if skills.is_dir()
         else []
     )
-    demo_dirs = (
-        sorted(p for p in demos.iterdir() if p.is_dir()) if demos.is_dir() else []
-    )
+    demo_dirs = sorted(p for p in demos.iterdir() if p.is_dir()) if demos.is_dir() else []
     problems: list[str] = []
     for skill_dir in skill_dirs:
         problems.extend(skill_problems(skill_dir, demos))
     skill_names = {p.name for p in skill_dirs}
     for demo_dir in demo_dirs:
         if demo_dir.name not in skill_names:
-            problems.append(
-                f"demos/{demo_dir.name}: no skill at skills/{demo_dir.name}/"
-            )
+            problems.append(f"demos/{demo_dir.name}: no skill at skills/{demo_dir.name}/")
     return problems
 
 

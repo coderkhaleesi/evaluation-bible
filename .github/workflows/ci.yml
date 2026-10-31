@@ -1,0 +1,106 @@
+# Installed by software-factories (install.sh). Pinned to factory ref 99ab225.
+# Edit factory.json for commands and lanes. Re-run install.sh to move the pins.
+name: CI
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, labeled, unlabeled]
+  schedule:
+    - cron: "17 3 * * *"
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: ci-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+jobs:
+  changes:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    outputs:
+      selection: ${{ steps.classify.outputs.selection }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - id: classify
+        uses: coderkhaleesi/software-factories/actions/classify@99ab225dcf92b4470b127659fc37681cf1b8ba34 # software-factories 99ab225
+  static:
+    needs: changes
+    if: ${{ fromJSON(needs.changes.outputs.selection).lanes.static }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: ./.github/actions/factory-setup
+      - uses: coderkhaleesi/software-factories/actions/lane@99ab225dcf92b4470b127659fc37681cf1b8ba34 # software-factories 99ab225
+        with:
+          lane: static
+          selection: ${{ needs.changes.outputs.selection }}
+  unit:
+    needs: changes
+    if: ${{ fromJSON(needs.changes.outputs.selection).lanes.unit }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: ./.github/actions/factory-setup
+      - uses: coderkhaleesi/software-factories/actions/lane@99ab225dcf92b4470b127659fc37681cf1b8ba34 # software-factories 99ab225
+        with:
+          lane: unit
+          selection: ${{ needs.changes.outputs.selection }}
+  integration:
+    needs: changes
+    if: ${{ fromJSON(needs.changes.outputs.selection).lanes.integration }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: ./.github/actions/factory-setup
+      - uses: coderkhaleesi/software-factories/actions/lane@99ab225dcf92b4470b127659fc37681cf1b8ba34 # software-factories 99ab225
+        with:
+          lane: integration
+          selection: ${{ needs.changes.outputs.selection }}
+  acceptance:
+    needs: changes
+    if: ${{ fromJSON(needs.changes.outputs.selection).lanes.acceptance }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: ./.github/actions/factory-setup
+      - uses: coderkhaleesi/software-factories/actions/lane@99ab225dcf92b4470b127659fc37681cf1b8ba34 # software-factories 99ab225
+        with:
+          lane: acceptance
+          selection: ${{ needs.changes.outputs.selection }}
+  artifact:
+    needs: changes
+    if: ${{ fromJSON(needs.changes.outputs.selection).lanes.artifact }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: ./.github/actions/factory-setup
+      - uses: coderkhaleesi/software-factories/actions/lane@99ab225dcf92b4470b127659fc37681cf1b8ba34 # software-factories 99ab225
+        with:
+          lane: artifact
+          selection: ${{ needs.changes.outputs.selection }}
+  required:
+    needs: [changes, static, unit, integration, acceptance, artifact]
+    if: ${{ always() }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: coderkhaleesi/software-factories/actions/required@99ab225dcf92b4470b127659fc37681cf1b8ba34 # software-factories 99ab225
+        with:
+          needs: ${{ toJSON(needs) }}
