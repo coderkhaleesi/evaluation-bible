@@ -15,6 +15,7 @@ Validate steps and the final validation use these commands, not invented ones. A
 - Test: `uv run pytest`
 - Lint: `uv run ruff check . && uv run ruff format --check .`
 - Typecheck: `uv run mypy src tools`
+- Structure: `uv run python tools/validate_structure.py`
 - No-fakes gate: `bash scripts/check.sh`
 <!-- commands:end -->
 
