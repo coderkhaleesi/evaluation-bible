@@ -6,9 +6,7 @@ from pathlib import Path
 
 import pytest
 
-sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "tools"))
-
-from validate_structure import validate
+from tools.validate_structure import validate
 
 TOOL = Path(__file__).resolve().parents[1] / "tools" / "validate_structure.py"
 
