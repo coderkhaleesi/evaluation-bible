@@ -1,4 +1,4 @@
-# Installed by software-factories (install.sh). Pinned to factory ref 4efa059.
+# Installed by software-factories (install.sh). Pinned to factory ref e40c134.
 # Nightly mutation sweep. Runs factory.json's mutation command, keeps the report as an artifact,
 # posts the score as a neutral check-run and on the "Factory health" issue, and files one
 # factory:suggested issue when the score is below the threshold. Nothing here blocks a merge.
@@ -23,7 +23,7 @@ jobs:
         with:
           persist-credentials: false
       - uses: ./.github/actions/factory-setup
-      - uses: coderkhaleesi/software-factories/actions/mutation@4efa0591989bad8650fd179473e7c5c9057aca47 # software-factories 4efa059
+      - uses: coderkhaleesi/software-factories/actions/mutation@e40c134db6795bfc9c44f0beb14043b2fd379ff5 # software-factories e40c134
         with:
           token: ${{ github.token }}
       - if: ${{ always() }}
