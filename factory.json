@@ -76,7 +76,12 @@
       "off": "the verification skill is generated in T8"
     },
     "artifact": {
-      "off": "deps-diff and secret scanning arrive in T10"
+      "paths": [],
+      "fast": [],
+      "full": {
+        "commands": [],
+        "secrets": []
+      }
     }
   },
   "artifact": {

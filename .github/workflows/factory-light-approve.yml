@@ -1,4 +1,4 @@
-# Installed by software-factories (install.sh). Pinned to factory ref 4efa059.
+# Installed by software-factories (install.sh). Pinned to factory ref 95a9e61.
 # The deterministic step of the trust policy's light class: when the planner has labelled an
 # issue factory:light and factory:planned, apply factory:approved through the App so the builder
 # starts. A person applies factory:approved for every other class.
