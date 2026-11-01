@@ -24,7 +24,7 @@ network:
   allowed: [defaults, python]
 steps:
   - name: Refuse to build an issue without a plan or with an open factory pull request
-    uses: coderkhaleesi/software-factories/actions/gate@16cebcf0e1f54e52d3595d553e662fb6f246fa84 # software-factories 16cebcf
+    uses: coderkhaleesi/software-factories/actions/gate@12462f92d07b2bbce4014352aee6e82244825d8a # software-factories 12462f9
     with:
       for: build
       issue: ${{ github.event.issue.number }}
@@ -58,7 +58,7 @@ timeout-minutes: 45
 max-turns: 200
 max-ai-credits: 800
 max-daily-ai-credits: 1200
-source: coderkhaleesi/software-factories/workflows/factory-build.md@a515b2572a03aca45300eaee30479846f3f10281
+source: coderkhaleesi/software-factories/workflows/factory-build.md@16fdf8141d1b92cf0d2afa84d2943ffb08661b0f
 ---
 
 # Factory builder
