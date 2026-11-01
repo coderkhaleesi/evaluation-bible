@@ -53,6 +53,9 @@ safe-outputs:
     required-labels: [factory:built]
     if-no-changes: error
     protected-files: request-review
+    # The pre-flight read of branch protection needs administration: read on the App, which it
+    # does not have. GitHub still enforces protection at push time.
+    check-branch-protection: false
   add-comment:
     target: "*"
     max: 1
@@ -66,7 +69,7 @@ timeout-minutes: 30
 max-turns: 100
 max-ai-credits: 400
 max-daily-ai-credits: 800
-source: coderkhaleesi/software-factories/workflows/factory-pr-fix.md@458a9196e3df51b689af67721db5fb787045e17e
+source: coderkhaleesi/software-factories/workflows/factory-pr-fix.md@a0425396a44627a45aa18468ad50b13187258304
 ---
 
 # Factory fixer
