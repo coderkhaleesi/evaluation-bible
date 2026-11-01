@@ -54,11 +54,13 @@ safe-outputs:
   add-labels:
     allowed: [factory:stuck, factory:needs-input]
     max: 1
+  threat-detection:
+    continue-on-error: false
 timeout-minutes: 45
 max-turns: 200
 max-ai-credits: 800
 max-daily-ai-credits: 1200
-source: coderkhaleesi/software-factories/workflows/factory-build.md@16fdf8141d1b92cf0d2afa84d2943ffb08661b0f
+source: coderkhaleesi/software-factories/workflows/factory-build.md@458a9196e3df51b689af67721db5fb787045e17e
 ---
 
 # Factory builder

@@ -66,7 +66,7 @@ timeout-minutes: 30
 max-turns: 100
 max-ai-credits: 400
 max-daily-ai-credits: 800
-source: coderkhaleesi/software-factories/workflows/factory-pr-fix.md@16fdf8141d1b92cf0d2afa84d2943ffb08661b0f
+source: coderkhaleesi/software-factories/workflows/factory-pr-fix.md@458a9196e3df51b689af67721db5fb787045e17e
 ---
 
 # Factory fixer

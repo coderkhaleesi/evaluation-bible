@@ -35,7 +35,7 @@ timeout-minutes: 10
 max-turns: 20
 max-ai-credits: 50
 max-daily-ai-credits: 100
-source: coderkhaleesi/software-factories/workflows/factory-ci-doctor.md@16fdf8141d1b92cf0d2afa84d2943ffb08661b0f
+source: coderkhaleesi/software-factories/workflows/factory-ci-doctor.md@458a9196e3df51b689af67721db5fb787045e17e
 ---
 
 # Factory CI doctor

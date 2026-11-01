@@ -37,7 +37,7 @@ timeout-minutes: 15
 max-turns: 40
 max-ai-credits: 100
 max-daily-ai-credits: 300
-source: coderkhaleesi/software-factories/workflows/factory-plan.md@16fdf8141d1b92cf0d2afa84d2943ffb08661b0f
+source: coderkhaleesi/software-factories/workflows/factory-plan.md@458a9196e3df51b689af67721db5fb787045e17e
 ---
 
 # Factory planner
