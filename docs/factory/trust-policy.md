@@ -18,6 +18,10 @@ The planner reads the issue's risk class and the diff it expects. The classifier
 
 Protected files are `AGENTS.md`, `CLAUDE.md`, `no-fakes.allow`, `no-fakes.profile`, `scripts/check.sh`, `scripts/check_no_fakes.py`, `ruff.toml`, `.claude/`, `.github/`, and `ci/`.
 
+## Mutation score
+
+The nightly sweep (`Mutation sweep`, mutmut) scores killed mutants over all judged mutants, with mutants no test reaches counted against the project. The threshold is 0.8, recorded in `factory.json` under `mutation.threshold`. Below it, the sweep files one issue "Strengthen tests in <module>" labelled `factory:suggested`; the owner promotes it to `factory:ready` or closes it. The score never blocks a merge.
+
 ## Human touches
 
 Per change, two. Per release, one.
