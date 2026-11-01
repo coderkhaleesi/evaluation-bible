@@ -17,7 +17,7 @@ imports:
   - shared/factory.md
 steps:
   - name: Refuse to plan an issue that already has a plan
-    uses: coderkhaleesi/software-factories/actions/gate@12462f92d07b2bbce4014352aee6e82244825d8a # software-factories 12462f9
+    uses: coderkhaleesi/software-factories/actions/gate@4975a5c47f98fc4e95469c6360d98b5398311b81 # software-factories 4975a5c
     with:
       for: plan
       issue: ${{ github.event.issue.number }}
@@ -37,7 +37,7 @@ timeout-minutes: 15
 max-turns: 40
 max-ai-credits: 100
 max-daily-ai-credits: 300
-source: coderkhaleesi/software-factories/workflows/factory-plan.md@458a9196e3df51b689af67721db5fb787045e17e
+source: coderkhaleesi/software-factories/workflows/factory-plan.md@be9a6882cfa264b2bccde5a1fa78f134a796e67f
 ---
 
 # Factory planner
