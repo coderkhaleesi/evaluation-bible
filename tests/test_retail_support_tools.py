@@ -80,3 +80,13 @@ def test_escalate_on_an_unknown_order(tools: RetailSupportTools) -> None:
     result = tools.escalate("ORD-9999", "refund exceeds limit")
     assert result["status"] == "error"
     assert "ORD-9999" in str(result["message"])
+
+
+@pytest.mark.parametrize("amount", [0.0, -500.0])
+def test_issue_refund_of_a_non_positive_amount_is_refused_and_leaves_the_store_unchanged(
+    tools: RetailSupportTools, amount: float
+) -> None:
+    result = tools.issue_refund("ORD-1001", amount)
+    assert result["status"] == "error"
+    assert str(amount) in str(result["message"])
+    assert tools.lookup_order("ORD-1001")["order_status"] == "placed"

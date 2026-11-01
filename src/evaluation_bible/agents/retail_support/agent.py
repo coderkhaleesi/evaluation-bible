@@ -20,8 +20,8 @@ INSTRUCTION = (
 
 def _require_model_name() -> str:
     model = os.environ.get(AGENT_MODEL_ENV_VAR)
-    if model is None:
-        raise RuntimeError(f"{AGENT_MODEL_ENV_VAR} is not set")
+    if not model:
+        raise RuntimeError(f"{AGENT_MODEL_ENV_VAR} is not set or is empty")
     return model
 
 

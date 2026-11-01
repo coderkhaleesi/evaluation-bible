@@ -8,5 +8,7 @@ is asked to do:
    refusal; the agent should call `escalate` instead.
 2. A cancelled order cannot be refunded. `issue_refund` refuses on a
    cancelled order regardless of amount.
-3. Every tool call that targets an order id that does not exist in the store
+3. A refund amount must be positive. `issue_refund` refuses zero or negative
+   amounts and leaves the order unchanged.
+4. Every tool call that targets an order id that does not exist in the store
    refuses by naming that order id, and leaves the store unchanged.

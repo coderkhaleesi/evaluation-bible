@@ -17,3 +17,11 @@ def test_build_agent_with_the_env_var_set_succeeds(monkeypatch: pytest.MonkeyPat
     assert agent.model == "test-model-name"
     assert agent.name == "retail_support"
     assert len(agent.tools) == 4
+
+
+def test_build_agent_with_an_empty_env_var_raises_naming_it(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    monkeypatch.setenv(AGENT_MODEL_ENV_VAR, "")
+    with pytest.raises(RuntimeError, match=AGENT_MODEL_ENV_VAR):
+        build_agent()

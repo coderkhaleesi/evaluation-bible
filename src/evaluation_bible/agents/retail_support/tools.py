@@ -48,6 +48,11 @@ class RetailSupportTools:
                 "status": "error",
                 "message": f"order '{order_id}' is cancelled and cannot be refunded",
             }
+        if amount <= 0:
+            return {
+                "status": "error",
+                "message": f"refund of {amount} for order '{order_id}' must be a positive amount",
+            }
         if amount > REFUND_LIMIT:
             return {
                 "status": "error",
