@@ -1,6 +1,6 @@
 [project]
 name = "evaluation-bible"
-version = "0.0.0"
+version = "0.1.0"
 description = "Agent-evaluation best practices for enterprises, packaged as agent skills with runnable demos on Google ADK"
 readme = "README.md"
 requires-python = ">=3.12"
