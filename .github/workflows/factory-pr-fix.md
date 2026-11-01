@@ -8,7 +8,7 @@ on:
   workflow_run:
     workflows: ["CI"]
     types: [completed]
-    branches: ["factory/**"]
+    branches: ["factory/issue-**"]
     conclusion: [failure]
   roles: [admin, maintainer, write]
   # CI on a pull request the App opened or pushed to runs as the App.
@@ -69,7 +69,7 @@ timeout-minutes: 30
 max-turns: 100
 max-ai-credits: 400
 max-daily-ai-credits: 800
-source: coderkhaleesi/software-factories/workflows/factory-pr-fix.md@4efa0591989bad8650fd179473e7c5c9057aca47
+source: coderkhaleesi/software-factories/workflows/factory-pr-fix.md@9761dfa011ad710e048ee0596ca5f777fc396069
 ---
 
 # Factory fixer
