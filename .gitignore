@@ -14,3 +14,4 @@ build/
 .agents/*.tsv
 reports/
 .github/aw/logs/
+mutants/

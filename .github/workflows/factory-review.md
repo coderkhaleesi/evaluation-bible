@@ -10,7 +10,8 @@ on:
   roles: [admin, maintainer, write]
   # The App opens factory pull requests.
   bots: ["td-software-factory"]
-if: ${{ startsWith(github.event.pull_request.head.ref, 'factory/') }}
+# Only the builder's branches, factory/issue-<N>-<slug>; a person's factory/* branch is not reviewed.
+if: ${{ startsWith(github.event.pull_request.head.ref, 'factory/issue-') }}
 permissions:
   contents: read
   pull-requests: read
@@ -33,7 +34,7 @@ timeout-minutes: 15
 max-turns: 30
 max-ai-credits: 150
 max-daily-ai-credits: 300
-source: coderkhaleesi/software-factories/workflows/factory-review.md@458a9196e3df51b689af67721db5fb787045e17e
+source: coderkhaleesi/software-factories/workflows/factory-review.md@9761dfa011ad710e048ee0596ca5f777fc396069
 ---
 
 # Factory reviewer
