@@ -5,7 +5,7 @@ description = "Agent-evaluation best practices for enterprises, packaged as agen
 readme = "README.md"
 requires-python = ">=3.12"
 license = "Apache-2.0"
-dependencies = []
+dependencies = ["google-adk>=2.13"]
 
 [dependency-groups]
 dev = [
