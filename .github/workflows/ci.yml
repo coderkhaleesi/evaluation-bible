@@ -1,4 +1,4 @@
-# Installed by software-factories (install.sh). Pinned to factory ref cf52323.
+# Installed by software-factories (install.sh). Pinned to factory ref 95a9e61.
 # Edit factory.json for commands and lanes. Re-run install.sh to move the pins.
 name: CI
 on:
@@ -24,7 +24,7 @@ jobs:
           fetch-depth: 0
           persist-credentials: false
       - id: classify
-        uses: coderkhaleesi/software-factories/actions/classify@cf523235f79facbd8dd2d9c74914a7966fbd12ce # software-factories cf52323
+        uses: coderkhaleesi/software-factories/actions/classify@95a9e614228c863179d1b66bc563380ae8fa0c20 # software-factories 95a9e61
   static:
     needs: changes
     if: ${{ fromJSON(needs.changes.outputs.selection).lanes.static }}
@@ -36,7 +36,7 @@ jobs:
           fetch-depth: 0
           persist-credentials: false
       - uses: ./.github/actions/factory-setup
-      - uses: coderkhaleesi/software-factories/actions/lane@cf523235f79facbd8dd2d9c74914a7966fbd12ce # software-factories cf52323
+      - uses: coderkhaleesi/software-factories/actions/lane@95a9e614228c863179d1b66bc563380ae8fa0c20 # software-factories 95a9e61
         with:
           lane: static
           selection: ${{ needs.changes.outputs.selection }}
@@ -51,7 +51,7 @@ jobs:
           fetch-depth: 0
           persist-credentials: false
       - uses: ./.github/actions/factory-setup
-      - uses: coderkhaleesi/software-factories/actions/lane@cf523235f79facbd8dd2d9c74914a7966fbd12ce # software-factories cf52323
+      - uses: coderkhaleesi/software-factories/actions/lane@95a9e614228c863179d1b66bc563380ae8fa0c20 # software-factories 95a9e61
         with:
           lane: unit
           selection: ${{ needs.changes.outputs.selection }}
@@ -66,7 +66,7 @@ jobs:
           fetch-depth: 0
           persist-credentials: false
       - uses: ./.github/actions/factory-setup
-      - uses: coderkhaleesi/software-factories/actions/lane@cf523235f79facbd8dd2d9c74914a7966fbd12ce # software-factories cf52323
+      - uses: coderkhaleesi/software-factories/actions/lane@95a9e614228c863179d1b66bc563380ae8fa0c20 # software-factories 95a9e61
         with:
           lane: integration
           selection: ${{ needs.changes.outputs.selection }}
@@ -81,7 +81,7 @@ jobs:
           fetch-depth: 0
           persist-credentials: false
       - uses: ./.github/actions/factory-setup
-      - uses: coderkhaleesi/software-factories/actions/lane@cf523235f79facbd8dd2d9c74914a7966fbd12ce # software-factories cf52323
+      - uses: coderkhaleesi/software-factories/actions/lane@95a9e614228c863179d1b66bc563380ae8fa0c20 # software-factories 95a9e61
         with:
           lane: acceptance
           selection: ${{ needs.changes.outputs.selection }}
@@ -96,13 +96,13 @@ jobs:
           fetch-depth: 0
           persist-credentials: false
       - uses: ./.github/actions/factory-setup
-      - uses: coderkhaleesi/software-factories/actions/artifact@cf523235f79facbd8dd2d9c74914a7966fbd12ce # software-factories cf52323
+      - uses: coderkhaleesi/software-factories/actions/artifact@95a9e614228c863179d1b66bc563380ae8fa0c20 # software-factories 95a9e61
         with:
           base: ${{ github.event.pull_request.base.sha }}
           head: ${{ github.event.pull_request.head.sha }}
           pr: ${{ github.event.pull_request.number }}
           token: ${{ github.token }}
-      - uses: coderkhaleesi/software-factories/actions/lane@cf523235f79facbd8dd2d9c74914a7966fbd12ce # software-factories cf52323
+      - uses: coderkhaleesi/software-factories/actions/lane@95a9e614228c863179d1b66bc563380ae8fa0c20 # software-factories 95a9e61
         with:
           lane: artifact
           selection: ${{ needs.changes.outputs.selection }}
@@ -115,6 +115,6 @@ jobs:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           persist-credentials: false
-      - uses: coderkhaleesi/software-factories/actions/required@cf523235f79facbd8dd2d9c74914a7966fbd12ce # software-factories cf52323
+      - uses: coderkhaleesi/software-factories/actions/required@95a9e614228c863179d1b66bc563380ae8fa0c20 # software-factories 95a9e61
         with:
           needs: ${{ toJSON(needs) }}
