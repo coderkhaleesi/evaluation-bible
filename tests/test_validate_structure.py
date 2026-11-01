@@ -46,6 +46,18 @@ def test_frontmatter_name_must_equal_the_directory(tmp_path: Path) -> None:
     ]
 
 
+def test_frontmatter_name_must_be_lower_case_kebab_case(tmp_path: Path) -> None:
+    make_skill(tmp_path, "hill_climb", text=GOOD.format(name="hill_climb"))
+    assert validate(tmp_path) == [
+        "skills/hill_climb/SKILL.md: frontmatter name 'hill_climb' is not lower-case kebab-case"
+    ]
+
+
+def test_frontmatter_name_in_kebab_case_passes(tmp_path: Path) -> None:
+    make_skill(tmp_path, "hill-climb")
+    assert validate(tmp_path) == []
+
+
 def test_skill_md_over_500_lines_fails(tmp_path: Path) -> None:
     text = GOOD.format(name="self-heal") + "line\n" * 500
     make_skill(tmp_path, "self-heal", text=text)
