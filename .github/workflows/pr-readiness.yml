@@ -1,4 +1,4 @@
-# Installed by software-factories (install.sh). Pinned to factory ref c6ec7ec.
+# Installed by software-factories (install.sh). Pinned to factory ref be9a688.
 # The second human touch. Runs on the default branch for every pull request event and after CI
 # or a review completes, judges readiness from the API, and posts one commit status on the head.
 # Two deterministic steps follow: a factory draft whose CI passed is marked ready, and a factory
@@ -27,7 +27,7 @@ jobs:
         with:
           persist-credentials: false
       - id: readiness
-        uses: coderkhaleesi/software-factories/actions/readiness@c6ec7eca27ce51528d3a6b70f3f99bdf7268a16f # software-factories c6ec7ec
+        uses: coderkhaleesi/software-factories/actions/readiness@be9a6882cfa264b2bccde5a1fa78f134a796e67f # software-factories be9a688
         with:
           pr: ${{ github.event.pull_request.number }}
           branch: ${{ github.event.workflow_run.head_branch }}
