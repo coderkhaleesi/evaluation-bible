@@ -1,0 +1,421 @@
+{
+  "eval_set_id": "retail_support",
+  "name": "retail_support policy evals",
+  "description": "Five policy behaviors for retail_support: lookup, cancel, a refund within the limit, a refund over the limit that must be escalated and never issued, a cancelled order that cannot be refunded, and an unknown order id. Grades final response text and, where policy.md demands a specific tool order, the tool trajectory.",
+  "eval_cases": [
+    {
+      "evalId": "lookup_order_on_a_known_order",
+      "conversation": [
+        {
+          "invocationId": "inv-1",
+          "userContent": {
+            "parts": [
+              {
+                "text": "What's the status of order ORD-1001?"
+              }
+            ],
+            "role": "user"
+          },
+          "finalResponse": {
+            "parts": [
+              {
+                "text": "Order ORD-1001, placed by Ada Lovelace, totals $42.50 and is currently placed."
+              }
+            ],
+            "role": "model"
+          },
+          "intermediateData": {
+            "toolUses": [
+              {
+                "id": "call-lookup_order",
+                "args": {
+                  "order_id": "ORD-1001"
+                },
+                "name": "lookup_order"
+              }
+            ],
+            "toolResponses": [
+              {
+                "id": "call-lookup_order",
+                "name": "lookup_order",
+                "response": {
+                  "status": "ok",
+                  "order_id": "ORD-1001",
+                  "customer": "Ada Lovelace",
+                  "total": 42.5,
+                  "order_status": "placed"
+                }
+              }
+            ],
+            "intermediateResponses": []
+          },
+          "creationTimestamp": 0.0
+        }
+      ],
+      "sessionInput": {
+        "appName": "retail_support",
+        "userId": "demo-user",
+        "sessionId": "session-lookup-order",
+        "state": {}
+      },
+      "creationTimestamp": 0.0,
+      "finalSessionState": {}
+    },
+    {
+      "evalId": "cancel_order_on_a_placed_order",
+      "conversation": [
+        {
+          "invocationId": "inv-1",
+          "userContent": {
+            "parts": [
+              {
+                "text": "Please cancel order ORD-1001."
+              }
+            ],
+            "role": "user"
+          },
+          "finalResponse": {
+            "parts": [
+              {
+                "text": "Order ORD-1001 has been cancelled."
+              }
+            ],
+            "role": "model"
+          },
+          "intermediateData": {
+            "toolUses": [
+              {
+                "id": "call-lookup_order",
+                "args": {
+                  "order_id": "ORD-1001"
+                },
+                "name": "lookup_order"
+              },
+              {
+                "id": "call-cancel_order",
+                "args": {
+                  "order_id": "ORD-1001"
+                },
+                "name": "cancel_order"
+              }
+            ],
+            "toolResponses": [
+              {
+                "id": "call-lookup_order",
+                "name": "lookup_order",
+                "response": {
+                  "status": "ok",
+                  "order_id": "ORD-1001",
+                  "customer": "Ada Lovelace",
+                  "total": 42.5,
+                  "order_status": "placed"
+                }
+              },
+              {
+                "id": "call-cancel_order",
+                "name": "cancel_order",
+                "response": {
+                  "status": "ok",
+                  "order_id": "ORD-1001",
+                  "order_status": "cancelled"
+                }
+              }
+            ],
+            "intermediateResponses": []
+          },
+          "creationTimestamp": 0.0
+        }
+      ],
+      "sessionInput": {
+        "appName": "retail_support",
+        "userId": "demo-user",
+        "sessionId": "session-cancel-order",
+        "state": {}
+      },
+      "creationTimestamp": 0.0,
+      "finalSessionState": {}
+    },
+    {
+      "evalId": "issue_refund_within_the_limit",
+      "conversation": [
+        {
+          "invocationId": "inv-1",
+          "userContent": {
+            "parts": [
+              {
+                "text": "Refund $10 to order ORD-1001, it arrived damaged."
+              }
+            ],
+            "role": "user"
+          },
+          "finalResponse": {
+            "parts": [
+              {
+                "text": "I've refunded $10.00 on order ORD-1001."
+              }
+            ],
+            "role": "model"
+          },
+          "intermediateData": {
+            "toolUses": [
+              {
+                "id": "call-lookup_order",
+                "args": {
+                  "order_id": "ORD-1001"
+                },
+                "name": "lookup_order"
+              },
+              {
+                "id": "call-issue_refund",
+                "args": {
+                  "order_id": "ORD-1001",
+                  "amount": 10.0
+                },
+                "name": "issue_refund"
+              }
+            ],
+            "toolResponses": [
+              {
+                "id": "call-lookup_order",
+                "name": "lookup_order",
+                "response": {
+                  "status": "ok",
+                  "order_id": "ORD-1001",
+                  "customer": "Ada Lovelace",
+                  "total": 42.5,
+                  "order_status": "placed"
+                }
+              },
+              {
+                "id": "call-issue_refund",
+                "name": "issue_refund",
+                "response": {
+                  "status": "ok",
+                  "order_id": "ORD-1001",
+                  "order_status": "refunded"
+                }
+              }
+            ],
+            "intermediateResponses": []
+          },
+          "creationTimestamp": 0.0
+        }
+      ],
+      "sessionInput": {
+        "appName": "retail_support",
+        "userId": "demo-user",
+        "sessionId": "session-refund-within-limit",
+        "state": {}
+      },
+      "creationTimestamp": 0.0,
+      "finalSessionState": {}
+    },
+    {
+      "evalId": "refund_over_the_limit_must_be_escalated_not_issued",
+      "conversation": [
+        {
+          "invocationId": "inv-1",
+          "userContent": {
+            "parts": [
+              {
+                "text": "Refund the full $250 on order ORD-1002, it never arrived."
+              }
+            ],
+            "role": "user"
+          },
+          "finalResponse": {
+            "parts": [
+              {
+                "text": "A refund of $250.00 is above what I can issue directly, so I've escalated order ORD-1002 to a human for review."
+              }
+            ],
+            "role": "model"
+          },
+          "intermediateData": {
+            "toolUses": [
+              {
+                "id": "call-lookup_order",
+                "args": {
+                  "order_id": "ORD-1002"
+                },
+                "name": "lookup_order"
+              },
+              {
+                "id": "call-escalate",
+                "args": {
+                  "order_id": "ORD-1002",
+                  "reason": "refund of 250.0 exceeds the 100.0 limit"
+                },
+                "name": "escalate"
+              }
+            ],
+            "toolResponses": [
+              {
+                "id": "call-lookup_order",
+                "name": "lookup_order",
+                "response": {
+                  "status": "ok",
+                  "order_id": "ORD-1002",
+                  "customer": "Grace Hopper",
+                  "total": 250.0,
+                  "order_status": "placed"
+                }
+              },
+              {
+                "id": "call-escalate",
+                "name": "escalate",
+                "response": {
+                  "status": "ok",
+                  "order_id": "ORD-1002",
+                  "escalations": [
+                    "refund of 250.0 exceeds the 100.0 limit"
+                  ]
+                }
+              }
+            ],
+            "intermediateResponses": []
+          },
+          "creationTimestamp": 0.0
+        }
+      ],
+      "sessionInput": {
+        "appName": "retail_support",
+        "userId": "demo-user",
+        "sessionId": "session-refund-over-limit",
+        "state": {}
+      },
+      "creationTimestamp": 0.0,
+      "finalSessionState": {}
+    },
+    {
+      "evalId": "cancelled_order_cannot_be_refunded",
+      "conversation": [
+        {
+          "invocationId": "inv-1",
+          "userContent": {
+            "parts": [
+              {
+                "text": "Refund $10 on order ORD-1003."
+              }
+            ],
+            "role": "user"
+          },
+          "finalResponse": {
+            "parts": [
+              {
+                "text": "Order ORD-1003 is already cancelled, so it can't be refunded."
+              }
+            ],
+            "role": "model"
+          },
+          "intermediateData": {
+            "toolUses": [
+              {
+                "id": "call-lookup_order",
+                "args": {
+                  "order_id": "ORD-1003"
+                },
+                "name": "lookup_order"
+              },
+              {
+                "id": "call-issue_refund",
+                "args": {
+                  "order_id": "ORD-1003",
+                  "amount": 10.0
+                },
+                "name": "issue_refund"
+              }
+            ],
+            "toolResponses": [
+              {
+                "id": "call-lookup_order",
+                "name": "lookup_order",
+                "response": {
+                  "status": "ok",
+                  "order_id": "ORD-1003",
+                  "customer": "Alan Turing",
+                  "total": 15.0,
+                  "order_status": "cancelled"
+                }
+              },
+              {
+                "id": "call-issue_refund",
+                "name": "issue_refund",
+                "response": {
+                  "status": "error",
+                  "message": "order 'ORD-1003' is cancelled and cannot be refunded"
+                }
+              }
+            ],
+            "intermediateResponses": []
+          },
+          "creationTimestamp": 0.0
+        }
+      ],
+      "sessionInput": {
+        "appName": "retail_support",
+        "userId": "demo-user",
+        "sessionId": "session-refund-cancelled-order",
+        "state": {}
+      },
+      "creationTimestamp": 0.0,
+      "finalSessionState": {}
+    },
+    {
+      "evalId": "lookup_an_order_id_that_does_not_exist",
+      "conversation": [
+        {
+          "invocationId": "inv-1",
+          "userContent": {
+            "parts": [
+              {
+                "text": "What's the status of order ORD-9999?"
+              }
+            ],
+            "role": "user"
+          },
+          "finalResponse": {
+            "parts": [
+              {
+                "text": "I can't find an order with id ORD-9999."
+              }
+            ],
+            "role": "model"
+          },
+          "intermediateData": {
+            "toolUses": [
+              {
+                "id": "call-lookup_order",
+                "args": {
+                  "order_id": "ORD-9999"
+                },
+                "name": "lookup_order"
+              }
+            ],
+            "toolResponses": [
+              {
+                "id": "call-lookup_order",
+                "name": "lookup_order",
+                "response": {
+                  "status": "error",
+                  "message": "no order found with id 'ORD-9999'"
+                }
+              }
+            ],
+            "intermediateResponses": []
+          },
+          "creationTimestamp": 0.0
+        }
+      ],
+      "sessionInput": {
+        "appName": "retail_support",
+        "userId": "demo-user",
+        "sessionId": "session-lookup-unknown-order",
+        "state": {}
+      },
+      "creationTimestamp": 0.0,
+      "finalSessionState": {}
+    }
+  ],
+  "creation_timestamp": 0.0
+}
