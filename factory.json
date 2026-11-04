@@ -25,6 +25,11 @@
     "nofakes": {
       "label": "No-fakes gate",
       "run": "bash scripts/check.sh"
+    },
+    "acceptance": {
+      "label": "Acceptance",
+      "run": "uv run pytest tests/acceptance/run_features.py",
+      "note": "FACTORY_TIER=fast for the keyless features or full for every feature; CI sets it from the lane's tier"
     }
   },
   "paths": {
@@ -70,10 +75,28 @@
       }
     },
     "integration": {
-      "off": "no container dependency until tracing code lands (T8)"
+      "off": "no container dependency until tracing code lands (the roadmap's Phase 3)"
     },
     "acceptance": {
-      "off": "the verification skill is generated in T8"
+      "paths": [
+        "src/**",
+        "tools/**",
+        "demos/**",
+        "tests/**",
+        "pyproject.toml",
+        "uv.lock"
+      ],
+      "fast": [
+        "acceptance"
+      ],
+      "full": {
+        "commands": [],
+        "secrets": [
+          "GOOGLE_API_KEY",
+          "EVAL_BIBLE_AGENT_MODEL",
+          "EVAL_BIBLE_JUDGE_MODEL"
+        ]
+      }
     },
     "artifact": {
       "paths": [],
