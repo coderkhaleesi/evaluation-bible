@@ -23,7 +23,7 @@ build-backend = "hatchling.build"
 packages = ["src/evaluation_bible"]
 
 [tool.pytest.ini_options]
-testpaths = ["tests"]
+testpaths = ["tests", "demos"]
 pythonpath = ["."]
 
 [tool.mypy]
