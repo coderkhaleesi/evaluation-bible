@@ -1,4 +1,4 @@
-# Installed by software-factories (install.sh). Pinned to factory ref b3a9c5a.
+# Installed by software-factories (install.sh). Pinned to factory ref ca8d190.
 # Edit factory.json for commands and lanes. Re-run install.sh to move the pins.
 name: CI
 on:
@@ -21,7 +21,7 @@ jobs:
           fetch-depth: 0
           persist-credentials: false
       - id: classify
-        uses: coderkhaleesi/software-factories/actions/classify@b3a9c5a01ec2414867cad51a33cc4b88aed34681 # software-factories b3a9c5a
+        uses: coderkhaleesi/software-factories/actions/classify@ca8d1905972ffd5fa538fa103ecf3f47f257a9f3 # software-factories ca8d190
   static:
     needs: changes
     if: ${{ fromJSON(needs.changes.outputs.selection).lanes.static }}
@@ -33,7 +33,7 @@ jobs:
           fetch-depth: 0
           persist-credentials: false
       - uses: ./.github/actions/factory-setup
-      - uses: coderkhaleesi/software-factories/actions/lane@b3a9c5a01ec2414867cad51a33cc4b88aed34681 # software-factories b3a9c5a
+      - uses: coderkhaleesi/software-factories/actions/lane@ca8d1905972ffd5fa538fa103ecf3f47f257a9f3 # software-factories ca8d190
         with:
           lane: static
           selection: ${{ needs.changes.outputs.selection }}
@@ -48,7 +48,7 @@ jobs:
           fetch-depth: 0
           persist-credentials: false
       - uses: ./.github/actions/factory-setup
-      - uses: coderkhaleesi/software-factories/actions/lane@b3a9c5a01ec2414867cad51a33cc4b88aed34681 # software-factories b3a9c5a
+      - uses: coderkhaleesi/software-factories/actions/lane@ca8d1905972ffd5fa538fa103ecf3f47f257a9f3 # software-factories ca8d190
         with:
           lane: unit
           selection: ${{ needs.changes.outputs.selection }}
@@ -63,7 +63,7 @@ jobs:
           fetch-depth: 0
           persist-credentials: false
       - uses: ./.github/actions/factory-setup
-      - uses: coderkhaleesi/software-factories/actions/lane@b3a9c5a01ec2414867cad51a33cc4b88aed34681 # software-factories b3a9c5a
+      - uses: coderkhaleesi/software-factories/actions/lane@ca8d1905972ffd5fa538fa103ecf3f47f257a9f3 # software-factories ca8d190
         with:
           lane: integration
           selection: ${{ needs.changes.outputs.selection }}
@@ -78,7 +78,7 @@ jobs:
           fetch-depth: 0
           persist-credentials: false
       - uses: ./.github/actions/factory-setup
-      - uses: coderkhaleesi/software-factories/actions/lane@b3a9c5a01ec2414867cad51a33cc4b88aed34681 # software-factories b3a9c5a
+      - uses: coderkhaleesi/software-factories/actions/lane@ca8d1905972ffd5fa538fa103ecf3f47f257a9f3 # software-factories ca8d190
         with:
           lane: acceptance
           selection: ${{ needs.changes.outputs.selection }}
@@ -93,13 +93,13 @@ jobs:
           fetch-depth: 0
           persist-credentials: false
       - uses: ./.github/actions/factory-setup
-      - uses: coderkhaleesi/software-factories/actions/artifact@b3a9c5a01ec2414867cad51a33cc4b88aed34681 # software-factories b3a9c5a
+      - uses: coderkhaleesi/software-factories/actions/artifact@ca8d1905972ffd5fa538fa103ecf3f47f257a9f3 # software-factories ca8d190
         with:
           base: ${{ github.event.pull_request.base.sha }}
           head: ${{ github.event.pull_request.head.sha }}
           pr: ${{ github.event.pull_request.number }}
           token: ${{ github.token }}
-      - uses: coderkhaleesi/software-factories/actions/lane@b3a9c5a01ec2414867cad51a33cc4b88aed34681 # software-factories b3a9c5a
+      - uses: coderkhaleesi/software-factories/actions/lane@ca8d1905972ffd5fa538fa103ecf3f47f257a9f3 # software-factories ca8d190
         with:
           lane: artifact
           selection: ${{ needs.changes.outputs.selection }}
@@ -112,6 +112,6 @@ jobs:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           persist-credentials: false
-      - uses: coderkhaleesi/software-factories/actions/required@b3a9c5a01ec2414867cad51a33cc4b88aed34681 # software-factories b3a9c5a
+      - uses: coderkhaleesi/software-factories/actions/required@ca8d1905972ffd5fa538fa103ecf3f47f257a9f3 # software-factories ca8d190
         with:
           needs: ${{ toJSON(needs) }}
