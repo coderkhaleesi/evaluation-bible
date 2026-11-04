@@ -17,6 +17,7 @@ Validate steps and the final validation use these commands, not invented ones. A
 - Typecheck: `uv run mypy src tools`
 - Structure: `uv run python tools/validate_structure.py`
 - No-fakes gate: `bash scripts/check.sh`
+- Acceptance: `uv run pytest tests/acceptance` (FACTORY_TIER=fast for the keyless features or full for every feature; CI sets it from the lane's tier)
 <!-- commands:end -->
 
 Per project the factory serves, replace this list with that project's commands and keep the no-fakes gate.
