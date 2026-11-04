@@ -27,9 +27,9 @@ Expect `ok` and `adk, version 2.<minor>.<patch>`. If this fails, nothing else is
 
 The feature map at `tests/acceptance/features/` is the recipe. Its README states the contract. The map lives under `tests/`, not in this skill's directory, because `.claude/` is protected from factory workflows and the builder must add a feature whenever it adds a demo.
 
-- One feature: `FACTORY_TIER=fast uv run pytest tests/acceptance -k <feature-id>`
-- Every keyless feature: `FACTORY_TIER=fast uv run pytest tests/acceptance`
-- Every feature, keyed ones included: `FACTORY_TIER=full uv run pytest tests/acceptance` with `EVAL_BIBLE_AGENT_MODEL`, `EVAL_BIBLE_JUDGE_MODEL`, and the provider key from `.env.example` set in the shell
+- One feature: `FACTORY_TIER=fast uv run pytest tests/acceptance/run_features.py -k <feature-id>`
+- Every keyless feature: `FACTORY_TIER=fast uv run pytest tests/acceptance/run_features.py`
+- Every feature, keyed ones included: `FACTORY_TIER=full uv run pytest tests/acceptance/run_features.py` with `EVAL_BIBLE_AGENT_MODEL`, `EVAL_BIBLE_JUDGE_MODEL`, and the provider key from `.env.example` set in the shell
 
 A keyed feature carries `- Tier: full`, and the secrets it needs are named in `factory.json` under `lanes.acceptance.full.secrets`. The nightly workflow runs that tier under the `nightly` environment. A pull request runs the fast tier only.
 
@@ -45,7 +45,7 @@ Features that need scratch state create it with `mktemp -d` and remove it before
 
 ## Helpers
 
-`tests/acceptance/test_features.py` is the runner, seeded by the factory and owned by this project. To add a feature, copy a file in `tests/acceptance/features/`, keep the four H2 sections, one `- Tier:` line, and bash fences that check their result, then add a line to the README's Features list. Every `demos/<name>/README.md` needs `demo-<name>.md`, and the runner fails until it exists.
+`tests/acceptance/run_features.py` is the runner, seeded by the factory and owned by this project. To add a feature, copy a file in `tests/acceptance/features/`, keep the four H2 sections, one `- Tier:` line, and bash fences that check their result, then add a line to the README's Features list. Every `demos/<name>/README.md` needs `demo-<name>.md`, and the runner fails until it exists.
 
 ## Maintenance
 
